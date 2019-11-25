@@ -1,0 +1,83 @@
+RandomVSRandom Report
+
+Eric Chang
+1005312341
+October 10. 2019
+CSC207
+Iliir Dema
+
+1) The second player seems to have the advantage given both players are usign a random stragetgy when playing othello. When researching about this topic, there seems to be the preconception that given both players play perfectly, 
+player 2 will always win. Given RandomVSRandom does not play othello with perfect strategy, it is difficult to infer how 
+
+
+2) Watch https://www.youtube.com/watch?v=Iq9DzN6mvYA Done
+
+3) Briefly write your thoughts on the above video below:
+	Learning about the four ways we code apply a "hacking" mindset to solving statistical problems was intersting. I could see how by directing simulating games of othello, we could see how RandomVSRandom 
+	applys that methodolgy to figure out our question of "which player has an advantage given both players use a random strategy."
+
+	It was a good refresher that statistics is about asking the right questions and making sure we keep focussed on our question while testing our hypothesis.
+
+ 
+Let F(n) denote number of wins for player n.
+
+4) My null hypothesis is that given both players use a random strategy in Othello, both players should have an equal likelihood of winning. i.e. F(P1) = F(P2)
+
+5) My alternate hypothesis is that given both players use a random stratgy in Othello, player 2 will win more games then player 1. i.e. F(P1) < F(P2)
+
+6) My experimental results do not support H0, so they support Ha
+
+7) As in the video, use either math or code (add a Java Class) to argue for or against H0
+	
+	Our arguement against our null hypothesis will use the direct simulation strategy. To do so,
+	we will write in the java language to explain our though proccess.
+
+	Assuming we have our code for RandomVsRandom. Lets create counters to keep track of number of wins per player.
+
+	class calculateProbability{ // composition
+
+		int p1Wins;
+		int p2wins;
+		int curGames;
+		int numGames = 10000;
+		OthelloControllerRandomVSRandom oc;
+
+		public calculateProbability() {
+			
+			p1Wins = 0;
+			p2wins = 0;
+			curGames = 0;
+				
+			while (curGames <= numGames) {
+				oc = new OthelloControllerRandomVSRandom();
+			
+				char winner = oc.play();
+				if (winner == OthelloBoard.P1) {
+					p1wins++;
+					}
+				if (winner == OthelloBoard.P2) {
+					p2wins++;
+					}
+				curGames++;
+				}
+			System.out.println("Probability P1 wins=" + (float) p1wins / numGames); 
+		System.out.println("Probability P2 wins=" + (float) p2wins / numGames);
+			}
+		}
+
+	}
+
+	//** and we get the results below 
+	*
+	* n  |	r1	|	r2	|	r3	|	r4	|	r5	|	r6	|	r7	|	r8	|	r9	|  r10	|
+	* P1 | .4584 | .4514 | .4543 	|.4563	| .4577| .4498	|.4582	|.4499	|.4573	|. 4578	|
+	* P2 |.4964	|.5065	|.515	|.4991	| .508	|.5986	|.5986	|.5078	|.5027	|.5096	|
+	* 
+	* Analyzing these results we could see that  per 10000 games, P2 always won the majority of the games and as such,
+	* this result supports our alternate hypothesis. 
+	*/
+
+References: 
+https://www.thoughtco.com/null-hypothesis-vs-alternative-hypothesis-3126413
+
+
